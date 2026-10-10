@@ -1653,6 +1653,65 @@
         flex: 0 0 220px;
       }
     }
+  
+    /* Language Switcher */
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 3px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      user-select: none;
+    }
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      line-height: 1.2;
+      letter-spacing: 0.03em;
+    }
+    .lang-btn:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .lang-btn.active {
+      background: var(--green);
+      color: #070908;
+      font-weight: 800;
+      box-shadow: 0 0 14px var(--green-glow-strong);
+    }
+    .mobile-lang-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      margin-bottom: 4px;
+    }
+    .mobile-lang-label {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    @media (max-width: 480px) {
+      .lang-btn {
+        padding: 5px 9px;
+        font-size: 12px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1678,14 +1737,18 @@
       </a>
 
       <nav>
-        <a href="#features">Features</a>
-        <a href="#screenshots">Screenshots</a>
-        <a href="#privacy">Privacy</a>
-        <a href="privacy-policy">Privacy Policy</a>
+        <a href="#features" data-i18n="nav.features">Features</a>
+        <a href="#screenshots" data-i18n="nav.screenshots">Screenshots</a>
+        <a href="#privacy" data-i18n="nav.privacy">Privacy</a>
+        <a href="privacy-policy.html" data-i18n="nav.privacyPolicy">Privacy Policy</a>
       </nav>
 
       <div class="header-actions">
-        <a href="#screenshots" class="nav-btn">Live Preview</a>
+        <div class="lang-switch" role="group" aria-label="Language selection">
+          <button type="button" class="lang-btn" data-lang="uk">UA</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <a href="#screenshots" class="nav-btn" data-i18n="nav.livePreview">Live Preview</a>
         <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Navigation Menu">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -1699,17 +1762,24 @@
 
   <!-- Mobile Drawer -->
   <div class="mobile-nav" id="mobileNav">
-    <a href="#features" class="mob-link">Features</a>
-    <a href="#screenshots" class="mob-link">Screenshots Showcase</a>
-    <a href="#privacy" class="mob-link">Privacy & Security</a>
-    <a href="privacy-policy" class="mob-link">Privacy Policy</a>
+    <div class="mobile-lang-box">
+      <span class="mobile-lang-label" data-i18n="nav.langLabel">Мова / Language</span>
+      <div class="lang-switch" role="group" aria-label="Language selection">
+        <button type="button" class="lang-btn" data-lang="uk">UA</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
+      </div>
+    </div>
+    <a href="#features" class="mob-link" data-i18n="nav.features">Features</a>
+    <a href="#screenshots" class="mob-link" data-i18n="nav.screenshotsShowcase">Screenshots Showcase</a>
+    <a href="#privacy" class="mob-link" data-i18n="nav.privacyAndSecurity">Privacy & Security</a>
+    <a href="privacy-policy.html" class="mob-link" data-i18n="nav.privacyPolicy">Privacy Policy</a>
     <a href="#screenshots" class="mob-link nav-btn-mobile">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
         <line x1="8" y1="21" x2="16" y2="21"></line>
         <line x1="12" y1="17" x2="12" y2="21"></line>
       </svg>
-      <span>Live Screen Preview</span>
+      <span data-i18n="nav.liveScreenPreview">Live Screen Preview</span>
     </a>
   </div>
 
@@ -1719,15 +1789,15 @@
       
       <div class="version-pill reveal">
         <div class="pulse-dot"></div>
-        <span>Free & Open Data Workout Tracker</span>
+        <span data-i18n="hero.pill">Free & Open Data Workout Tracker</span>
       </div>
 
-      <h1 class="reveal">
+      <h1 class="reveal" data-i18n-html="hero.title">
         Track workouts.<br>
         <span class="gradient-text">Keep your data private.</span>
       </h1>
 
-      <p class="sub reveal">
+      <p class="sub reveal" data-i18n="hero.sub">
         A fast, beautifully designed workout tracker. No account required, no invasive ads, no cloud sync — your training progress stays strictly on your phone.
       </p>
 
@@ -1737,20 +1807,20 @@
             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
           </svg>
-          100% On-device Data
+          <span data-i18n="hero.badgeOnDevice">100% On-device Data</span>
         </div>
         <div class="badge">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
           </svg>
-          Works Offline
+          <span data-i18n="hero.badgeOffline">Works Offline</span>
         </div>
         <div class="badge">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="10"></circle>
             <path d="m9 12 2 2 4-4"></path>
           </svg>
-          Free Forever • No Ads
+          <span data-i18n="hero.badgeFree">Free Forever • No Ads</span>
         </div>
       </div>
 
@@ -1759,10 +1829,10 @@
           <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="M3.609 1.814L13.793 12 3.61 22.186c-.347-.282-.572-.71-.572-1.222V3.036c0-.512.225-.94.571-1.222zM15.207 13.414l2.766 2.766-10.45 6.033 7.684-8.799zm2.766-5.594l-2.766 2.766-7.684-8.799 10.45 6.033zm1.613 4.288l-3.324-1.921 2.378-2.378 1.488.859c.72.416.72 1.096 0 1.512l-.542.313-.001.002-.001.002z"/>
           </svg>
-          <span>Coming Soon to Google Play</span>
+          <span data-i18n="hero.ctaGooglePlay">Coming Soon to Google Play</span>
         </a>
         <a class="cta-secondary" href="#screenshots">
-          <span>Explore Screens</span>
+          <span data-i18n="hero.ctaExplore">Explore Screens</span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M5 12h14M12 5l7 7-7 7"></path>
           </svg>
@@ -1777,32 +1847,32 @@
         <div class="stat-chip stat-chip-1">
           <div class="stat-chip-icon">🔥</div>
           <div>
-            <div class="stat-chip-title">Yearly Consistency</div>
-            <div class="stat-chip-val">54 / 100 Workouts (54%)</div>
+            <div class="stat-chip-title" data-i18n="hero.chip1Title">Yearly Consistency</div>
+            <div class="stat-chip-val" data-i18n="hero.chip1Val">54 / 100 Workouts (54%)</div>
           </div>
         </div>
 
         <div class="stat-chip stat-chip-2">
           <div class="stat-chip-icon">⚡</div>
           <div>
-            <div class="stat-chip-title">Health Connect</div>
-            <div class="stat-chip-val">Syncs Daily Steps & Distance</div>
+            <div class="stat-chip-title" data-i18n="hero.chip2Title">Health Connect</div>
+            <div class="stat-chip-val" data-i18n="hero.chip2Val">Syncs Daily Steps & Distance</div>
           </div>
         </div>
 
         <div class="stat-chip stat-chip-3">
           <div class="stat-chip-icon">📈</div>
           <div>
-            <div class="stat-chip-title">Predicted 1RM</div>
-            <div class="stat-chip-val">Real-time Volume Analytics</div>
+            <div class="stat-chip-title" data-i18n="hero.chip3Title">Predicted 1RM</div>
+            <div class="stat-chip-val" data-i18n="hero.chip3Val">Real-time Volume Analytics</div>
           </div>
         </div>
 
         <div class="stat-chip stat-chip-4">
           <div class="stat-chip-icon">🤖</div>
           <div>
-            <div class="stat-chip-title">Google Gemini AI</div>
-            <div class="stat-chip-val">Personalized Training Tips</div>
+            <div class="stat-chip-title" data-i18n="hero.chip4Title">Google Gemini AI</div>
+            <div class="stat-chip-val" data-i18n="hero.chip4Val">Personalized Training Tips</div>
           </div>
         </div>
 
@@ -1830,18 +1900,18 @@
             <line x1="8" y1="21" x2="16" y2="21"></line>
             <line x1="12" y1="17" x2="12" y2="21"></line>
           </svg>
-          Visual Showcase
+          <span data-i18n="showcase.tag">Visual Showcase</span>
         </div>
-        <h2>See it in action</h2>
-        <p>A clean, clutter-free dark interface crafted for fast workout logging at the gym. Click any screenshot for full-screen view.</p>
+        <h2 data-i18n="showcase.heading">See it in action</h2>
+        <p data-i18n="showcase.sub">A clean, clutter-free dark interface crafted for fast workout logging at the gym. Click any screenshot for full-screen view.</p>
       </div>
 
       <!-- Category Filter Tabs -->
       <div class="slider-tabs reveal">
-        <button class="slider-tab-btn active" data-filter="all">All Screens (8)</button>
-        <button class="slider-tab-btn" data-filter="core">Core & Templates</button>
-        <button class="slider-tab-btn" data-filter="progress">Progress & 1RM</button>
-        <button class="slider-tab-btn" data-filter="stats">Stats & Calendar</button>
+        <button class="slider-tab-btn active" data-filter="all" data-i18n="showcase.tabAll">All Screens (8)</button>
+        <button class="slider-tab-btn" data-filter="core" data-i18n="showcase.tabCore">Core & Templates</button>
+        <button class="slider-tab-btn" data-filter="progress" data-i18n="showcase.tabProgress">Progress & 1RM</button>
+        <button class="slider-tab-btn" data-filter="stats" data-i18n="showcase.tabStats">Stats & Calendar</button>
       </div>
 
       <!-- Slider Container -->
@@ -2100,96 +2170,96 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
           </svg>
-          Everything Built-In
+          <span data-i18n="features.tag">Everything Built-In</span>
         </div>
-        <h2>Engineered for Lifters</h2>
-        <p>No bloat, no subscription paywalls, no clutter. Just pure training efficiency.</p>
+        <h2 data-i18n="features.heading">Engineered for Lifters</h2>
+        <p data-i18n="features.sub">No bloat, no subscription paywalls, no clutter. Just pure training efficiency.</p>
       </div>
 
       <div class="features-grid">
         
         <div class="feature-card reveal">
           <div class="feature-icon-box">💪</div>
-          <h3>120+ Exercise Library</h3>
-          <p>Comprehensive database categorized by muscle groups, complete with instant live search and execution guidance.</p>
+          <h3 data-i18n="features.f1Title">120+ Exercise Library</h3>
+          <p data-i18n="features.f1Desc">Comprehensive database categorized by muscle groups, complete with instant live search and execution guidance.</p>
         </div>
 
         <div class="feature-card reveal">
           <div class="feature-icon-box">✏️</div>
-          <h3>Custom & Timed Sets</h3>
-          <p>Create your own personalized exercises with ease, including time-based movements like planks and warmup stretches.</p>
+          <h3 data-i18n="features.f2Title">Custom & Timed Sets</h3>
+          <p data-i18n="features.f2Desc">Create your own personalized exercises with ease, including time-based movements like planks and warmup stretches.</p>
         </div>
 
         <div class="feature-card reveal">
           <div class="feature-icon-box">📋</div>
-          <h3>Routine Templates</h3>
-          <p>Save your favorite workout splits (Push, Pull, Legs, Upper/Lower) and start training with a single tap.</p>
+          <h3 data-i18n="features.f3Title">Routine Templates</h3>
+          <p data-i18n="features.f3Desc">Save your favorite workout splits (Push, Pull, Legs, Upper/Lower) and start training with a single tap.</p>
         </div>
 
         <div class="feature-card reveal">
           <div class="feature-icon-box">⏱️</div>
-          <h3>Rest & Workout Timers</h3>
-          <p>Automated session timekeeper plus an intelligent rest timer equipped with distinct audio cues and vibration.</p>
+          <h3 data-i18n="features.f4Title">Rest & Workout Timers</h3>
+          <p data-i18n="features.f4Desc">Automated session timekeeper plus an intelligent rest timer equipped with distinct audio cues and vibration.</p>
         </div>
 
         <div class="feature-card reveal">
           <div class="feature-icon-box">📊</div>
-          <h3>In-Depth Statistics</h3>
-          <p>Visualize weekly training distribution, muscle group frequency, and monthly volume load with crisp charts.</p>
+          <h3 data-i18n="features.f5Title">In-Depth Statistics</h3>
+          <p data-i18n="features.f5Desc">Visualize weekly training distribution, muscle group frequency, and monthly volume load with crisp charts.</p>
         </div>
 
         <div class="feature-card reveal">
           <div class="feature-icon-box">📈</div>
-          <h3>Per-Exercise 1RM</h3>
-          <p>Track predicted 1-Rep Max calculations, heaviest lifts, and volume progression curves for every barbell & dumbbell lift.</p>
+          <h3 data-i18n="features.f6Title">Per-Exercise 1RM</h3>
+          <p data-i18n="features.f6Desc">Track predicted 1-Rep Max calculations, heaviest lifts, and volume progression curves for every barbell & dumbbell lift.</p>
         </div>
 
         <div class="feature-card reveal">
           <div class="feature-icon-box">🏆</div>
-          <h3>Personal Records & Streaks</h3>
-          <p>Automatically celebrated personal bests, milestone streaks, and unlockable achievement trophies.</p>
+          <h3 data-i18n="features.f7Title">Personal Records & Streaks</h3>
+          <p data-i18n="features.f7Desc">Automatically celebrated personal bests, milestone streaks, and unlockable achievement trophies.</p>
         </div>
 
         <div class="feature-card reveal">
           <div class="feature-icon-box">🗓️</div>
-          <h3>Activity Heatmap</h3>
-          <p>GitHub-inspired yearly consistency map that motivates you to keep training sessions regular throughout the calendar.</p>
+          <h3 data-i18n="features.f8Title">Activity Heatmap</h3>
+          <p data-i18n="features.f8Desc">GitHub-inspired yearly consistency map that motivates you to keep training sessions regular throughout the calendar.</p>
         </div>
 
         <div class="feature-card reveal">
           <div class="feature-icon-box">🎯</div>
-          <h3>Yearly Workout Target</h3>
-          <p>Define an annual training objective (e.g. 100 sessions) and watch your progress ring fill up session after session.</p>
+          <h3 data-i18n="features.f9Title">Yearly Workout Target</h3>
+          <p data-i18n="features.f9Desc">Define an annual training objective (e.g. 100 sessions) and watch your progress ring fill up session after session.</p>
         </div>
 
         <div class="feature-card reveal">
           <div class="feature-icon-box">🚶</div>
-          <h3>Step & Distance Sync</h3>
-          <p>Direct integration with Android Health Connect to monitor daily steps, walking distance, and activity on your dashboard.</p>
+          <h3 data-i18n="features.f10Title">Step & Distance Sync</h3>
+          <p data-i18n="features.f10Desc">Direct integration with Android Health Connect to monitor daily steps, walking distance, and activity on your dashboard.</p>
         </div>
 
         <div class="feature-card reveal">
           <div class="feature-icon-box">🤖</div>
-          <h3>Optional Gemini AI</h3>
-          <p>Get personalized training advice, volume balance tips, and recovery feedback powered by Google Gemini — 100% opt-in.</p>
+          <h3 data-i18n="features.f11Title">Optional Gemini AI</h3>
+          <p data-i18n="features.f11Desc">Get personalized training advice, volume balance tips, and recovery feedback powered by Google Gemini — 100% opt-in.</p>
         </div>
 
         <div class="feature-card reveal">
           <div class="feature-icon-box">📜</div>
-          <h3>Complete Session Logs</h3>
-          <p>Every logged workout, set, rep, and weight record remains archived and accessible whenever you need to reflect.</p>
+          <h3 data-i18n="features.f12Title">Complete Session Logs</h3>
+          <p data-i18n="features.f12Desc">Every logged workout, set, rep, and weight record remains archived and accessible whenever you need to reflect.</p>
         </div>
 
         <div class="feature-card reveal">
           <div class="feature-icon-box">🌙</div>
-          <h3>Pure OLED Dark Theme</h3>
-          <p>Carefully calibrated high-contrast dark aesthetic that saves battery life and eliminates screen glare in dim gym environments.</p>
+          <h3 data-i18n="features.f13Title">Pure OLED Dark Theme</h3>
+          <p data-i18n="features.f13Desc">Carefully calibrated high-contrast dark aesthetic that saves battery life and eliminates screen glare in dim gym environments.</p>
         </div>
 
         <div class="feature-card reveal">
           <div class="feature-icon-box">🌍</div>
-          <h3>Multi-Language Support</h3>
-          <p>Native localized experience in English, Ukrainian (Українська), and Romanian (Română).</p>
+          <h3 data-i18n="features.f14Title">Multi-Language Support</h3>
+          <p data-i18n="features.f14Desc">Native localized experience in English, Ukrainian (Українська), and Romanian (Română).</p>
         </div>
 
       </div>
@@ -2204,10 +2274,10 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
           </svg>
-          Privacy By Design
+          <span data-i18n="privacy.tag">Privacy By Design</span>
         </div>
-        <h2>Why We Do Things Differently</h2>
-        <p style="color: var(--text-muted); max-width: 650px;">Most fitness apps hold your data hostage behind mandatory cloud logins and monthly fees. Fitness Tracker is built on total user respect.</p>
+        <h2 data-i18n="privacy.heading">Why We Do Things Differently</h2>
+        <p style="color: var(--text-muted); max-width: 650px;" data-i18n="privacy.sub">Most fitness apps hold your data hostage behind mandatory cloud logins and monthly fees. Fitness Tracker is built on total user respect.</p>
 
         <div class="highlights-grid">
           
@@ -2219,8 +2289,8 @@
               </svg>
             </div>
             <div>
-              <h4>Zero Accounts Required</h4>
-              <p>Download and start logging right away. No email address, no password, no spam newsletters.</p>
+              <h4 data-i18n="privacy.p1Title">Zero Accounts Required</h4>
+              <p data-i18n="privacy.p1Desc">Download and start logging right away. No email address, no password, no spam newsletters.</p>
             </div>
           </div>
 
@@ -2231,8 +2301,8 @@
               </svg>
             </div>
             <div>
-              <h4>100% Local Device Storage</h4>
-              <p>Your weights, logs, and body stats never leave your phone. You have full custody of your fitness journey.</p>
+              <h4 data-i18n="privacy.p2Title">100% Local Device Storage</h4>
+              <p data-i18n="privacy.p2Desc">Your weights, logs, and body stats never leave your phone. You have full custody of your fitness journey.</p>
             </div>
           </div>
 
@@ -2244,8 +2314,8 @@
               </svg>
             </div>
             <div>
-              <h4>No Subscriptions Or Ads</h4>
-              <p>Enjoy all features without full-screen video ads interrupting your rest intervals or hidden paywalls.</p>
+              <h4 data-i18n="privacy.p3Title">No Subscriptions Or Ads</h4>
+              <p data-i18n="privacy.p3Desc">Enjoy all features without full-screen video ads interrupting your rest intervals or hidden paywalls.</p>
             </div>
           </div>
 
@@ -2258,13 +2328,13 @@
   <section class="cta-banner">
     <div class="wrap">
       <div class="banner-inner reveal">
-        <h2>Ready to Level Up Your Workouts?</h2>
-        <p>Simple, private, and powerful workout tracking is coming soon to your Android smartphone.</p>
+        <h2 data-i18n="cta.heading">Ready to Level Up Your Workouts?</h2>
+        <p data-i18n="cta.sub">Simple, private, and powerful workout tracking is coming soon to your Android smartphone.</p>
         <a class="cta-primary" href="#screenshots">
           <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="M3.609 1.814L13.793 12 3.61 22.186c-.347-.282-.572-.71-.572-1.222V3.036c0-.512.225-.94.571-1.222zM15.207 13.414l2.766 2.766-10.45 6.033 7.684-8.799zm2.766-5.594l-2.766 2.766-7.684-8.799 10.45 6.033zm1.613 4.288l-3.324-1.921 2.378-2.378 1.488.859c.72.416.72 1.096 0 1.512l-.542.313-.001.002-.001.002z"/>
           </svg>
-          <span>Coming Soon to Google Play</span>
+          <span data-i18n="hero.ctaGooglePlay">Coming Soon to Google Play</span>
         </a>
       </div>
     </div>
@@ -2284,16 +2354,16 @@
         </a>
 
         <div class="footer-links">
-          <a href="#features">Features</a>
-          <a href="#screenshots">Screenshots</a>
-          <a href="privacy-policy">Privacy Policy</a>
+          <a href="#features" data-i18n="nav.features">Features</a>
+          <a href="#screenshots" data-i18n="nav.screenshots">Screenshots</a>
+          <a href="privacy-policy.html" data-i18n="nav.privacyPolicy">Privacy Policy</a>
           <a href="mailto:foxiho.dev@gmail.com">foxiho.dev@gmail.com</a>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; 2026 Fitness Tracker. Crafted with privacy & performance in mind.</p>
-        <p><a href="#navbar">Back to top ↑</a></p>
+        <p data-i18n="footer.copyright">&copy; 2026 Fitness Tracker. Crafted with privacy & performance in mind.</p>
+        <p><a href="#navbar" data-i18n="footer.backToTop">Back to top ↑</a></p>
       </div>
     </div>
   </footer>
@@ -2306,7 +2376,7 @@
         <span class="lightbox-title" id="lightboxTitle">Home Dashboard</span>
       </div>
       <div class="lightbox-actions">
-        <span class="lightbox-counter">Use ← / → keys or swipe</span>
+        <span class="lightbox-counter" data-i18n="lightbox.counterHint">Use ← / → keys or swipe</span>
         <button class="lightbox-btn lightbox-close-btn" id="lightboxCloseBtn" aria-label="Close Fullscreen">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -2341,53 +2411,320 @@
 
   <!-- JavaScript Implementation -->
   <script>
-    // Screenshot metadata catalog
-    const screenshotsData = [
-      {
-        src: 'screenshot-home.jpg',
-        title: 'Home Dashboard',
-        desc: 'Yearly goal progress bar, daily step counter, body parameters & quick workout launcher.'
+    // i18n Translations Dictionary
+    const i18n = {
+      en: {
+        meta: {
+          title: "Fitness Tracker — Private, Offline & Free Workout Tracker",
+          description: "Free workout tracker app. Your data stays on your phone. Works 100% offline. No account, no ads, no cloud. Powered by optional AI analysis."
+        },
+        nav: {
+          features: "Features",
+          screenshots: "Screenshots",
+          privacy: "Privacy",
+          privacyPolicy: "Privacy Policy",
+          livePreview: "Live Preview",
+          screenshotsShowcase: "Screenshots Showcase",
+          privacyAndSecurity: "Privacy & Security",
+          liveScreenPreview: "Live Screen Preview",
+          langLabel: "Language"
+        },
+        hero: {
+          pill: "Free & Open Data Workout Tracker",
+          title: 'Track workouts.<br><span class="gradient-text">Keep your data private.</span>',
+          sub: "A fast, beautifully designed workout tracker. No account required, no invasive ads, no cloud sync — your training progress stays strictly on your phone.",
+          badgeOnDevice: "100% On-device Data",
+          badgeOffline: "Works Offline",
+          badgeFree: "Free Forever • No Ads",
+          ctaGooglePlay: "Coming Soon to Google Play",
+          ctaExplore: "Explore Screens",
+          chip1Title: "Yearly Consistency",
+          chip1Val: "54 / 100 Workouts (54%)",
+          chip2Title: "Health Connect",
+          chip2Val: "Syncs Daily Steps & Distance",
+          chip3Title: "Predicted 1RM",
+          chip3Val: "Real-time Volume Analytics",
+          chip4Title: "Google Gemini AI",
+          chip4Val: "Personalized Training Tips"
+        },
+        showcase: {
+          tag: "Visual Showcase",
+          heading: "See it in action",
+          sub: "A clean, clutter-free dark interface crafted for fast workout logging at the gym. Click any screenshot for full-screen view.",
+          tabAll: "All Screens (8)",
+          tabCore: "Core & Templates",
+          tabProgress: "Progress & 1RM",
+          tabStats: "Stats & Calendar",
+          enlarge: "Enlarge Screen"
+        },
+        features: {
+          tag: "Everything Built-In",
+          heading: "Engineered for Lifters",
+          sub: "No bloat, no subscription paywalls, no clutter. Just pure training efficiency.",
+          f1Title: "120+ Exercise Library",
+          f1Desc: "Comprehensive database categorized by muscle groups, complete with instant live search and execution guidance.",
+          f2Title: "Custom & Timed Sets",
+          f2Desc: "Create your own personalized exercises with ease, including time-based movements like planks and warmup stretches.",
+          f3Title: "Routine Templates",
+          f3Desc: "Save your favorite workout splits (Push, Pull, Legs, Upper/Lower) and start training with a single tap.",
+          f4Title: "Rest & Workout Timers",
+          f4Desc: "Automated session timekeeper plus an intelligent rest timer equipped with distinct audio cues and vibration.",
+          f5Title: "In-Depth Statistics",
+          f5Desc: "Visualize weekly training distribution, muscle group frequency, and monthly volume load with crisp charts.",
+          f6Title: "Per-Exercise 1RM",
+          f6Desc: "Track predicted 1-Rep Max calculations, heaviest lifts, and volume progression curves for every barbell & dumbbell lift.",
+          f7Title: "Personal Records & Streaks",
+          f7Desc: "Automatically celebrated personal bests, milestone streaks, and unlockable achievement trophies.",
+          f8Title: "Activity Heatmap",
+          f8Desc: "GitHub-inspired yearly consistency map that motivates you to keep training sessions regular throughout the calendar.",
+          f9Title: "Yearly Workout Target",
+          f9Desc: "Define an annual training objective (e.g. 100 sessions) and watch your progress ring fill up session after session.",
+          f10Title: "Step & Distance Sync",
+          f10Desc: "Direct integration with Android Health Connect to monitor daily steps, walking distance, and activity on your dashboard.",
+          f11Title: "Optional Gemini AI",
+          f11Desc: "Get personalized training advice, volume balance tips, and recovery feedback powered by Google Gemini — 100% opt-in.",
+          f12Title: "Complete Session Logs",
+          f12Desc: "Every logged workout, set, rep, and weight record remains archived and accessible whenever you need to reflect.",
+          f13Title: "Pure OLED Dark Theme",
+          f13Desc: "Carefully calibrated high-contrast dark aesthetic that saves battery life and eliminates screen glare in dim gym environments.",
+          f14Title: "Multi-Language Support",
+          f14Desc: "Native localized experience in English, Ukrainian (Українська), and Romanian (Română)."
+        },
+        privacy: {
+          tag: "Privacy By Design",
+          heading: "Why We Do Things Differently",
+          sub: "Most fitness apps hold your data hostage behind mandatory cloud logins and monthly fees. Fitness Tracker is built on total user respect.",
+          p1Title: "Zero Accounts Required",
+          p1Desc: "Download and start logging right away. No email address, no password, no spam newsletters.",
+          p2Title: "100% Local Device Storage",
+          p2Desc: "Your weights, logs, and body stats never leave your phone. You have full custody of your fitness journey.",
+          p3Title: "No Subscriptions Or Ads",
+          p3Desc: "Enjoy all features without full-screen video ads interrupting your rest intervals or hidden paywalls."
+        },
+        cta: {
+          heading: "Ready to Level Up Your Workouts?",
+          sub: "Simple, private, and powerful workout tracking is coming soon to your Android smartphone.",
+          btn: "Coming Soon to Google Play"
+        },
+        footer: {
+          copyright: "© 2026 Fitness Tracker. Crafted with privacy & performance in mind.",
+          backToTop: "Back to top ↑"
+        },
+        lightbox: {
+          counterHint: "Use ← / → keys or swipe",
+          closeAria: "Close Fullscreen",
+          prevAria: "Previous image",
+          nextAria: "Next image"
+        },
+        slides: [
+          {
+            title: "Home Dashboard",
+            shortDesc: "Yearly goal progress bar, daily step counter & quick start button.",
+            fullDesc: "Yearly goal progress bar, daily step counter, body parameters & quick workout launcher."
+          },
+          {
+            title: "Exercise Library",
+            shortDesc: "120+ exercises sorted by muscle groups with fast live search.",
+            fullDesc: "Over 120 exercises categorized by muscle groups with quick search and custom exercise creation."
+          },
+          {
+            title: "Workout Templates",
+            shortDesc: "Push, Pull, Legs & custom routines launched in one tap.",
+            fullDesc: "Pre-designed routines (Push, Pull, Legs) and custom saved routines ready to start in one tap."
+          },
+          {
+            title: "Progress & Records",
+            shortDesc: "Predicted 1RM calculations, max weight milestones and rep history.",
+            fullDesc: "Predicted 1RM calculation, maximum weight milestones, and detailed lift histories."
+          },
+          {
+            title: "Detailed Analytics",
+            shortDesc: "Muscle group frequency, total volume and weekday training chart.",
+            fullDesc: "Muscle group training frequency, workout volume, and weekday distribution breakdown."
+          },
+          {
+            title: "Volume Trends",
+            shortDesc: "30-day continuous volume progression and estimated calorie burn.",
+            fullDesc: "Continuous 30-day volume trends and estimated calorie expenditure curves."
+          },
+          {
+            title: "Activity Heatmap",
+            shortDesc: "GitHub-style yearly consistency grid highlighting training streaks.",
+            fullDesc: "GitHub-style yearly consistency grid highlighting training streaks and rest days."
+          },
+          {
+            title: "AI Analysis & Profile",
+            shortDesc: "Optional Gemini AI coaching suggestions, achievements and trophies.",
+            fullDesc: "Personalized AI workout advice powered by Google Gemini, streaks and achievement trophies."
+          }
+        ]
       },
-      {
-        src: 'screenshot-exercise-list.jpg',
-        title: 'Exercise Library',
-        desc: 'Over 120 exercises categorized by muscle groups with quick search and custom exercise creation.'
-      },
-      {
-        src: 'screenshot-templates.jpg',
-        title: 'Workout Templates',
-        desc: 'Pre-designed routines (Push, Pull, Legs) and custom saved routines ready to start in one tap.'
-      },
-      {
-        src: 'screenshot-progress.jpg',
-        title: 'Progress & Personal Records',
-        desc: 'Predicted 1RM calculation, maximum weight milestones, and detailed lift histories.'
-      },
-      {
-        src: 'screenshot-stats.jpg',
-        title: 'Detailed Statistics',
-        desc: 'Muscle group training frequency, workout volume, and weekday distribution breakdown.'
-      },
-      {
-        src: 'screenshot-trends.jpg',
-        title: 'Volume & Calorie Trends',
-        desc: 'Continuous 30-day volume trends and estimated calorie expenditure curves.'
-      },
-      {
-        src: 'screenshot-calendar.jpg',
-        title: 'Activity Heatmap',
-        desc: 'GitHub-style yearly consistency grid highlighting training streaks and rest days.'
-      },
-      {
-        src: 'screenshot-profile.jpg',
-        title: 'Profile & AI Analysis',
-        desc: 'Personalized AI workout advice powered by Google Gemini, streaks and achievement trophies.'
+
+      uk: {
+        meta: {
+          title: "Fitness Tracker — Приватний, офлайн та безкоштовний щоденник тренувань",
+          description: "Безкоштовний застосунок для тренувань. Ваші дані залишаються на телефоні. Працює 100% офлайн. Без акаунта, без реклами, без хмари. З розумним AI-аналізом."
+        },
+        nav: {
+          features: "Можливості",
+          screenshots: "Скриншоти",
+          privacy: "Конфіденційність",
+          privacyPolicy: "Політика конфіденційності",
+          livePreview: "Огляд екранів",
+          screenshotsShowcase: "Галерея екранів",
+          privacyAndSecurity: "Конфіденційність і безпека",
+          liveScreenPreview: "Огляд застосунку",
+          langLabel: "Мова / Language"
+        },
+        hero: {
+          pill: "Безкоштовний щоденник тренувань із захистом даних",
+          title: 'Тренуйся ефективно.<br><span class="gradient-text">Твої дані належать лише тобі.</span>',
+          sub: "Швидкий, естетичний щоденник тренувань. Без реєстрації, без нав'язливої реклами та без хмарної синхронізації — твій тренувальний прогрес залишається суто на твоєму телефоні.",
+          badgeOnDevice: "100% локальні дані",
+          badgeOffline: "Працює офлайн",
+          badgeFree: "Завжди безкоштовно • Без реклами",
+          ctaGooglePlay: "Незабаром у Google Play",
+          ctaExplore: "Переглянути інтерфейс",
+          chip1Title: "Річна дисципліна",
+          chip1Val: "54 / 100 Тренувань (54%)",
+          chip2Title: "Health Connect",
+          chip2Val: "Синхронізація кроків і дистанції",
+          chip3Title: "Розрахунок 1ПМ",
+          chip3Val: "Аналітика робочого об'єму наживо",
+          chip4Title: "Google Gemini AI",
+          chip4Val: "Персоналізовані поради тренувань"
+        },
+        showcase: {
+          tag: "Галерея інтерфейсу",
+          heading: "Погляньте на застосунок у дії",
+          sub: "Чистий, лаконічний темний інтерфейс, створений для швидкого запису підходів просто у залі. Натисніть на будь-який скриншот для повноекранного перегляду.",
+          tabAll: "Всі екрани (8)",
+          tabCore: "Базові та шаблони",
+          tabProgress: "Прогрес та 1ПМ",
+          tabStats: "Статистика та календар",
+          enlarge: "Збільшити екран"
+        },
+        features: {
+          tag: "Все включено",
+          heading: "Створено для тих, хто тренується",
+          sub: "Жодного зайвого коду, платних підписок чи візуального сміття. Тільки чиста ефективність тренувань.",
+          f1Title: "База зі 120+ вправ",
+          f1Desc: "Велика база за групами м'язів із миттєвим живим пошуком та підказками щодо техніки виконання.",
+          f2Title: "Власні та статичні вправи",
+          f2Desc: "Легко створюйте власні унікальні вправи, зокрема статичні (планка) та розминку на час.",
+          f3Title: "Шаблони тренувань",
+          f3Desc: "Зберігайте улюблені спліти (Push, Pull, Legs, Верх/Низ) та починайте заняття в один дотик.",
+          f4Title: "Таймери відпочинку та сесії",
+          f4Desc: "Автоматичний трекінг часу заняття та розумний таймер між підходами зі звуком і вібрацією.",
+          f5Title: "Глибока статистика",
+          f5Desc: "Наочні графіки тижневого розподілу навантаження, частоти груп м'язів та місячного тоннажу.",
+          f6Title: "Розрахунок 1ПМ для кожної вправи",
+          f6Desc: "Розрахунковий 1-повторний максимум, пікові ваги та динаміка об'єму для всіх вправ зі штангою та гантелями.",
+          f7Title: "Особисті рекорди та серії",
+          f7Desc: "Автоматична фіксація рекордів, безперервні серії тренувань та система досягнень і трофеїв.",
+          f8Title: "Календар активності",
+          f8Desc: "Річна сітка дисципліни в стилі GitHub, яка мотивує регулярно тренуватися протягом року.",
+          f9Title: "Річна тренувальна мета",
+          f9Desc: "Задайте мету на рік (наприклад, 100 занять) і спостерігайте, як заповнюється кільце прогресу.",
+          f10Title: "Синхронізація кроків і дистанції",
+          f10Desc: "Пряма інтеграція з Android Health Connect для відображення щоденних кроків, дистанції та активності.",
+          f11Title: "Розумний помічник Gemini AI",
+          f11Desc: "Персональні рекомендації щодо навантаження, балансу м'язів та відновлення на базі Google Gemini — суто за бажанням.",
+          f12Title: "Повний журнал історії",
+          f12Desc: "Кожне зафіксоване тренування, підхід, повторення та вага залишаються в архіві для зручного аналізу.",
+          f13Title: "Темна OLED-тема",
+          f13Desc: "Вивірений висококонтрастний дизайн, що зберігає заряд акумулятора та комфортний для очей у залі.",
+          f14Title: "Багатомовний інтерфейс",
+          f14Desc: "Повна нативна підтримка української, англійської та румунської мов безпосередньо в застосунку."
+        },
+        privacy: {
+          tag: "Конфіденційність за замовчуванням",
+          heading: "Чому ми робимо інакше",
+          sub: "Більшість застосунків блокують доступ до ваших даних без хмарної реєстрації та щомісячної підписки. Fitness Tracker побудовано на повній повазі до користувача.",
+          p1Title: "Жодних обов'язкових акаунтів",
+          p1Desc: "Встановлюйте та одразу записуйте тренування. Жодних адрес електронної пошти, паролів чи спам-розсилок.",
+          p2Title: "100% даних лише на пристрої",
+          p2Desc: "Ваші робочі ваги, щоденники та параметри тіла ніколи не залишають телефон. Тільки ви володієте своїми даними.",
+          p3Title: "Без підписок та реклами",
+          p3Desc: "Користуйтесь усіма можливостями без відеореклами посеред відпочинку та без прихованих платежів."
+        },
+        cta: {
+          heading: "Готові вивести тренування на новий рівень?",
+          sub: "Простий, приватний і потужний щоденник тренувань незабаром з'явиться на вашому Android-смартфоні.",
+          btn: "Незабаром у Google Play"
+        },
+        footer: {
+          copyright: "© 2026 Fitness Tracker. Створено з турботою про приватність та продуктивність.",
+          backToTop: "Вгору ↑"
+        },
+        lightbox: {
+          counterHint: "Клавіші ← / → або свайп",
+          closeAria: "Закрити перегляд",
+          prevAria: "Попереднє зображення",
+          nextAria: "Наступне зображення"
+        },
+        slides: [
+          {
+            title: "Головний екран",
+            shortDesc: "Прогрес річної цілі, лічильник щоденних кроків і кнопка швидкого старту.",
+            fullDesc: "Шкала прогресу річної мети, щоденні кроки, параметри тіла та швидкий запуск тренування."
+          },
+          {
+            title: "База вправ",
+            shortDesc: "120+ вправ за групами м'язів зі швидким живим пошуком.",
+            fullDesc: "Понад 120 вправ за групами м'язів, швидкий пошук та можливість створення власних вправ."
+          },
+          {
+            title: "Шаблони тренувань",
+            shortDesc: "Push, Pull, Legs і власні програми, готові до запуску в 1 дотик.",
+            fullDesc: "Готові програми (Push, Pull, Legs) та власні збережені тренування, готові до старту в один дотик."
+          },
+          {
+            title: "Прогрес та рекорди",
+            shortDesc: "Розрахунок 1ПМ, максимальна вага та детальна історія повторень.",
+            fullDesc: "Розрахунок розрахункового 1ПМ, рекорди ваги та детальна історія кожного підйому."
+          },
+          {
+            title: "Детальна аналітика",
+            shortDesc: "Частота тренування м'язів, тоннаж та графік за днями тижня.",
+            fullDesc: "Частота навантаження груп м'язів, загальний об'єм та розподіл тренувань за днями тижня."
+          },
+          {
+            title: "Динаміка об'єму",
+            shortDesc: "30-денний графік прогресії навантаження та оцінка спалених калорій.",
+            fullDesc: "Безперервний 30-денний графік тренувального об'єму та оцінка витрати калорій."
+          },
+          {
+            title: "Календар активності",
+            shortDesc: "Річна теплова карта в стилі GitHub з підсвічуванням тренувальних серій.",
+            fullDesc: "Річна сітка дисципліни в стилі GitHub із відображенням тренувальних днів та відпочинку."
+          },
+          {
+            title: "Профіль та AI-аналіз",
+            shortDesc: "Персоналізовані поради Gemini AI, досягнення та нагородні кубки.",
+            fullDesc: "Персональні рекомендації від Google Gemini, відстеження серій та трофеї за досягнення."
+          }
+        ]
       }
+    };
+
+    // Raw Screenshot Source files
+    const screenshotSources = [
+      'screenshot-home.jpg',
+      'screenshot-exercise-list.jpg',
+      'screenshot-templates.jpg',
+      'screenshot-progress.jpg',
+      'screenshot-stats.jpg',
+      'screenshot-trends.jpg',
+      'screenshot-calendar.jpg',
+      'screenshot-profile.jpg'
     ];
 
+    let currentLang = 'uk';
     let currentSlideIndex = 0;
+    let activeLightboxIndex = 0;
 
-    // Elements
+    // DOM Elements
     const sliderTrack = document.getElementById('sliderTrack');
     const slidePrevBtn = document.getElementById('slidePrevBtn');
     const slideNextBtn = document.getElementById('slideNextBtn');
@@ -2405,6 +2742,86 @@
     const lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
     const lightboxPrevBtn = document.getElementById('lightboxPrevBtn');
     const lightboxNextBtn = document.getElementById('lightboxNextBtn');
+
+    // Language Switching Logic
+    function setLanguage(lang) {
+      if (!i18n[lang]) lang = 'uk';
+      currentLang = lang;
+
+      // Update HTML lang attribute
+      document.documentElement.lang = lang;
+
+      // Update Meta Tags
+      document.title = i18n[lang].meta.title;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', i18n[lang].meta.description);
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle) ogTitle.setAttribute('content', i18n[lang].meta.title);
+      const ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogDesc) ogDesc.setAttribute('content', i18n[lang].meta.description);
+
+      // Update Active State on all Language Switcher Buttons
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+      });
+
+      // Update elements with [data-i18n]
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const keys = key.split('.');
+        let val = i18n[lang];
+        for (const k of keys) {
+          if (val) val = val[k];
+        }
+        if (typeof val === 'string') {
+          el.textContent = val;
+        }
+      });
+
+      // Update elements with [data-i18n-html]
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        const keys = key.split('.');
+        let val = i18n[lang];
+        for (const k of keys) {
+          if (val) val = val[k];
+        }
+        if (typeof val === 'string') {
+          el.innerHTML = val;
+        }
+      });
+
+      // Update Slides Cards
+      slideItems.forEach((item, idx) => {
+        const sData = i18n[lang].slides[idx];
+        if (sData) {
+          const titleEl = item.querySelector('.slide-title');
+          const descEl = item.querySelector('.slide-desc');
+          if (titleEl) titleEl.textContent = sData.title;
+          if (descEl) descEl.textContent = sData.shortDesc;
+        }
+        const zoomText = item.querySelector('.zoom-overlay span');
+        if (zoomText) zoomText.textContent = i18n[lang].showcase.enlarge;
+      });
+
+      // Update Lightbox if currently open
+      if (lightboxModal.classList.contains('active')) {
+        renderLightbox();
+      }
+
+      // Save preference
+      try {
+        localStorage.setItem('fitness_tracker_lang', lang);
+      } catch (e) {}
+    }
+
+    // Attach Event Listeners to Lang Buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.getAttribute('data-lang');
+        setLanguage(lang);
+      });
+    });
 
     // Initialize Slider Dots
     function buildDots() {
@@ -2520,8 +2937,6 @@
     // ==========================================================================
     // LIGHTBOX / FULLSCREEN VIEWER
     // ==========================================================================
-    let activeLightboxIndex = 0;
-
     function openLightbox(index) {
       activeLightboxIndex = index;
       renderLightbox();
@@ -2530,14 +2945,15 @@
     }
 
     function renderLightbox() {
-      const data = screenshotsData[activeLightboxIndex];
-      if (!data) return;
+      const slide = i18n[currentLang].slides[activeLightboxIndex];
+      const imgSrc = screenshotSources[activeLightboxIndex];
+      if (!slide || !imgSrc) return;
 
-      lightboxImg.src = data.src;
-      lightboxTitle.textContent = data.title;
-      lightboxCaption.textContent = data.desc;
+      lightboxImg.src = imgSrc;
+      lightboxTitle.textContent = slide.title;
+      lightboxCaption.textContent = slide.fullDesc;
       const numStr = String(activeLightboxIndex + 1).padStart(2, '0');
-      const totalStr = String(screenshotsData.length).padStart(2, '0');
+      const totalStr = String(screenshotSources.length).padStart(2, '0');
       lightboxBadge.textContent = `${numStr} / ${totalStr}`;
     }
 
@@ -2547,12 +2963,12 @@
     }
 
     function prevLightbox() {
-      activeLightboxIndex = (activeLightboxIndex - 1 + screenshotsData.length) % screenshotsData.length;
+      activeLightboxIndex = (activeLightboxIndex - 1 + screenshotSources.length) % screenshotSources.length;
       renderLightbox();
     }
 
     function nextLightbox() {
-      activeLightboxIndex = (activeLightboxIndex + 1) % screenshotsData.length;
+      activeLightboxIndex = (activeLightboxIndex + 1) % screenshotSources.length;
       renderLightbox();
     }
 
@@ -2653,6 +3069,30 @@
         mobileNav.classList.remove('open');
       });
     });
+
+    // Language Detection on Page Load
+    function initLanguage() {
+      let lang = 'uk'; // Default to Ukrainian as requested!
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlLang = urlParams.get('lang');
+        const savedLang = localStorage.getItem('fitness_tracker_lang');
+        if (urlLang === 'en' || urlLang === 'uk') {
+          lang = urlLang;
+        } else if (savedLang === 'en' || savedLang === 'uk') {
+          lang = savedLang;
+        } else {
+          const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+          if (browserLang.startsWith('en')) {
+            lang = 'en';
+          } else {
+            lang = 'uk';
+          }
+        }
+      } catch (e) {}
+      setLanguage(lang);
+    }
+    initLanguage();
   </script>
 </body>
 </html>
