@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Політика конфіденційності — Fitness Tracker</title>
+  <meta name="description" content="Політика конфіденційності застосунку Fitness Tracker. Ваші дані тренувань залишаються виключно на вашому пристрої.">
+  <meta name="theme-color" content="#070908">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-base: #070908;
+      --bg-surface: #0E1310;
+      --bg-card: rgba(18, 25, 21, 0.72);
+      --bg-card-hover: rgba(24, 34, 28, 0.9);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(0, 245, 137, 0.35);
+      --border-glass: rgba(255, 255, 255, 0.12);
+
+      --green: #00F589;
+      --green-dark: #00C86D;
+      --green-dim: #79F2B8;
+      --green-glow: rgba(0, 245, 137, 0.22);
+      --green-glow-strong: rgba(0, 245, 137, 0.45);
+
+      --text: #F5F7F6;
+      --text-muted: #9BA59F;
+      --text-faint: #59645E;
+
+      --font-main: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Plus Jakarta Sans', var(--font-main);
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 32px;
+
+      --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text);
+      font-family: var(--font-main);
+      line-height: 1.7;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Ambient Glow */
+    .ambient-glow-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ambient-glow-top {
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(700px, 90vw);
+      height: 380px;
+      background: radial-gradient(circle, rgba(0, 245, 137, 0.18) 0%, rgba(14, 28, 20, 0) 70%);
+      border-radius: 50%;
+      filter: blur(100px);
+    }
+    .grid-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      mask-image: radial-gradient(ellipse at 50% 20%, #000 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 20%, #000 30%, transparent 80%);
+    }
+
+    .wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+
+    /* Header */
+    header {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(7, 9, 8, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+    }
+    .logo span {
+      color: var(--green);
+    }
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, rgba(0, 245, 137, 0.2), rgba(0, 245, 137, 0.05));
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green);
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.03);
+      transition: var(--transition-smooth);
+    }
+    .back-btn:hover {
+      color: var(--green);
+      border-color: var(--border-accent);
+      background: rgba(0, 245, 137, 0.05);
+    }
+
+    /* Lang Switcher */
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 3px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      line-height: 1.2;
+    }
+    .lang-btn:hover {
+      color: var(--text);
+    }
+    .lang-btn.active {
+      background: var(--green);
+      color: #070908;
+      font-weight: 800;
+      box-shadow: 0 0 14px var(--green-glow-strong);
+    }
+
+    /* Policy Content */
+    main {
+      flex: 1;
+      padding: 60px 0 80px;
+    }
+    .policy-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 48px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+    .policy-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--green);
+      background: rgba(0, 245, 137, 0.08);
+      border: 1px solid var(--border-accent);
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 4vw, 36px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.25;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    .updated-date {
+      color: var(--green-dim);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 32px;
+      display: block;
+    }
+    .policy-body h2 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      margin: 36px 0 16px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 8px;
+    }
+    .policy-body h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin: 24px 0 12px;
+      color: var(--green-dim);
+    }
+    .policy-body p {
+      color: #CFD8D3;
+      margin-bottom: 16px;
+      font-size: 15px;
+    }
+    .policy-body ul {
+      margin: 12px 0 20px 24px;
+      color: #CFD8D3;
+      font-size: 15px;
+    }
+    .policy-body li {
+      margin-bottom: 8px;
+    }
+    .policy-body strong {
+      color: #FFFFFF;
+    }
+    .policy-body code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: var(--green-dim);
+      font-family: monospace;
+    }
+    .policy-body a {
+      color: var(--green);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0, 245, 137, 0.3);
+      transition: var(--transition-smooth);
+    }
+    .policy-body a:hover {
+      border-color: var(--green);
+      color: #FFFFFF;
+    }
+
+    /* Table */
+    .table-responsive {
+      overflow-x: auto;
+      margin: 20px 0 28px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14px;
+    }
+    th {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--green);
+      font-weight: 700;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    td {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: #CFD8D3;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 32px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-top: auto;
+    }
+
+    @media (max-width: 600px) {
+      .policy-card {
+        padding: 28px 20px;
+      }
+      .back-text {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Light Effects -->
+  <div class="ambient-glow-container">
+    <div class="ambient-glow-top"></div>
+    <div class="grid-bg"></div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="wrap">
+      <div class="header-inner">
+        <a href="index.html" class="logo">
+          <div class="logo-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 5v14M18 5v14M2 9h4M18 9h4M2 15h4M18 15h4M6 12h12"></path>
+            </svg>
+          </div>
+          Fitness<span>Tracker</span>
+        </a>
+
+        <div class="header-right">
+          <div class="lang-switch" role="group" aria-label="Language selection">
+            <button type="button" class="lang-btn active" data-lang="uk">UA</button>
+            <button type="button" class="lang-btn" data-lang="en">EN</button>
+          </div>
+          <a href="index.html" class="back-btn" id="backLink">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span class="back-text" id="backBtnText">На головну</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <article class="policy-card">
+        <div class="policy-tag" id="policyBadge">Конфіденційність та Захист даних</div>
+
+        <!-- UKRAINIAN CONTENT (Direct from privacy-policy.md) -->
+        <div id="contentUk" class="policy-body">
+<h1>Політика конфіденційності — Фітнес Трекер</h1>
+<span class="updated-date"><strong>Дата останнього оновлення:</strong> 26 липня 2026 р.</span>
+<p>Цей документ описує, які дані збирає застосунок <strong>Фітнес Трекер</strong> (пакет <code>com.fitness.tracker</code>) та як вони використовуються.</p>
+<h2>1. Хто ми</h2>
+<p>Фітнес Трекер розробляється незалежним розробником. З питань щодо цієї політики або ваших даних звертайтесь: <strong><a href="mailto:foxiho.dev@gmail.com">foxiho.dev@gmail.com</a></strong>.</p>
+<h2>2. Які дані ми збираємо</h2>
+<h3>2.1. Дані, що зберігаються лише на вашому пристрої</h3>
+<p>Ці дані <strong>ніколи не покидають ваш телефон</strong> і не передаються нам чи будь-кому іншому:</p>
+<ul>
+<li>Історія тренувань (вправи, підходи, повторення, вага, тривалість, калорії)</li>
+<li>Параметри тіла (вага, зріст)</li>
+<li>Шаблони тренувань</li>
+<li>Досягнення та серії тренувань (streaks)</li>
+<li>Налаштування застосунку (мова, одиниці виміру)</li>
+</ul>
+<p>Ці дані зберігаються в локальній базі даних на вашому пристрої (Room/SQLite) і видаляються повністю, якщо ви видалите застосунок.</p>
+<h3>2.2. Дані кроків (Health Connect)</h3>
+<p>Якщо ви надаєте дозвіл, застосунок читає дані про кількість кроків через <strong>Android Health Connect</strong> та/або сенсор кроків вашого пристрою — виключно для показу вашої денної/тижневої статистики кроків усередині застосунку. Ці дані не передаються третім сторонам.</p>
+<h3>2.3. Дані, що надсилаються для AI-аналізу (Google Gemini API)</h3>
+<p>Якщо ви користуєтесь функцією <strong>AI-аналізу</strong> у вашому профілі, окремі дані (наприклад, статистика тренувань чи параметри тіла, які ви бачите на екрані аналізу) надсилаються до <strong>Google Gemini API</strong> (Generative Language API) для генерації персоналізованих порад. Обробка цих даних регулюється <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Політикою конфіденційності Google</a>. Ми не зберігаємо копії цих запитів на власних серверах — у нас немає власних серверів; запит іде напряму з вашого пристрою до Google.</p>
+<h3>2.4. Реклама</h3>
+<p>Наразі рекламні мережі (Google AdMob) <strong>не активні</strong> в застосунку. Якщо рекламу буде увімкнено в майбутньому, цю політику буде оновлено відповідно, із зазначенням, які дані збирає рекламна мережа.</p>
+<h2>3. Чого ми НЕ робимо</h2>
+<ul>
+<li>Ми не вимагаємо реєстрації чи входу через акаунт.</li>
+<li>Ми не продаємо та не передаємо ваші особисті дані третім сторонам у комерційних цілях.</li>
+<li>Ми не збираємо ваші дані на власних серверах — застосунок працює локально, за винятком запитів до Health Connect (сенсори пристрою) та Gemini API (лише за вашою явною дією).</li>
+</ul>
+<h2>4. Дозволи застосунку</h2>
+<div class="table-responsive">
+<table>
+<thead><tr>
+<th>Дозвіл</th>
+<th>Навіщо потрібен</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Фізична активність (Activity Recognition)</td>
+<td>Підрахунок кроків</td>
+</tr>
+<tr>
+<td>Health Connect (кроки)</td>
+<td>Синхронізація даних кроків з інших джерел (наприклад, Mi Fitness)</td>
+</tr>
+<tr>
+<td>Сповіщення</td>
+<td>Нагадування про тренування, індикатор активного тренування</td>
+</tr>
+<tr>
+<td>Точні будильники (Exact Alarms)</td>
+<td>Своєчасні нагадування про тренування у вибраний вами час</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>5. Видалення даних</h2>
+<p>Оскільки всі особисті дані зберігаються локально на вашому пристрої, ви можете видалити їх у будь-який момент:</p>
+<ul>
+<li>Видаливши застосунок, або</li>
+<li>Очистивши дані застосунку через Налаштування Android → Застосунки → Фітнес Трекер → Очистити дані.</li>
+</ul>
+<h2>6. Діти</h2>
+<p>Застосунок не призначений для дітей віком до 13 років і свідомо не збирає дані дітей цієї вікової категорії.</p>
+<h2>7. Зміни до цієї політики</h2>
+<p>Ми можемо оновлювати цю політику конфіденційності. Дата останнього оновлення завжди вказана вгорі документа.</p>
+<h2>8. Контакти</h2>
+<p>З питань щодо цієї політики: <strong><a href="mailto:foxiho.dev@gmail.com">foxiho.dev@gmail.com</a></strong></p>
+        </div>
+
+        <!-- ENGLISH CONTENT (Direct from privacy-policy.md) -->
+        <div id="contentEn" class="policy-body" style="display: none;">
+<h1>Privacy Policy — Fitness Tracker (English)</h1>
+<span class="updated-date"><strong>Last updated:</strong> July 26, 2026</span>
+<p>This document describes what data the <strong>Fitness Tracker</strong> app (package <code>com.fitness.tracker</code>) collects and how it is used.</p>
+<h2>1. Who we are</h2>
+<p>Fitness Tracker is developed by an independent developer. For any questions about this policy or your data, contact: <strong><a href="mailto:foxiho.dev@gmail.com">foxiho.dev@gmail.com</a></strong>.</p>
+<h2>2. What data we collect</h2>
+<h3>2.1. Data stored only on your device</h3>
+<p>This data <strong>never leaves your phone</strong> and is never sent to us or anyone else:</p>
+<ul>
+<li>Workout history (exercises, sets, reps, weight, duration, calories)</li>
+<li>Body parameters (weight, height)</li>
+<li>Workout templates</li>
+<li>Achievements and workout streaks</li>
+<li>App settings (language, units)</li>
+</ul>
+<p>This data is stored in a local database on your device (Room/SQLite) and is fully deleted if you uninstall the app.</p>
+<h3>2.2. Step data (Health Connect)</h3>
+<p>If you grant permission, the app reads your step count via <strong>Android Health Connect</strong> and/or your device's step sensor — solely to display your daily/weekly step statistics within the app. This data is not shared with third parties.</p>
+<h3>2.3. Data sent for AI analysis (Google Gemini API)</h3>
+<p>If you use the <strong>AI analysis</strong> feature in your profile, certain data (such as workout statistics or body parameters shown on the analysis screen) is sent to the <strong>Google Gemini API</strong> (Generative Language API) to generate personalized advice. This processing is governed by <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>. We do not keep copies of these requests on our own servers — we don't operate any servers; the request goes directly from your device to Google.</p>
+<h3>2.4. Advertising</h3>
+<p>Advertising networks (Google AdMob) are <strong>not currently active</strong> in the app. If ads are enabled in the future, this policy will be updated accordingly, specifying what data the ad network collects.</p>
+<h2>3. What we do NOT do</h2>
+<ul>
+<li>We do not require account registration or login.</li>
+<li>We do not sell or share your personal data with third parties for commercial purposes.</li>
+<li>We do not collect your data on our own servers — the app works locally, except for requests to Health Connect (device sensors) and the Gemini API (only upon your explicit action).</li>
+</ul>
+<h2>4. App permissions</h2>
+<div class="table-responsive">
+<table>
+<thead><tr>
+<th>Permission</th>
+<th>Why it's needed</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Physical Activity Recognition</td>
+<td>Step counting</td>
+</tr>
+<tr>
+<td>Health Connect (steps)</td>
+<td>Syncing step data from other sources (e.g. Mi Fitness)</td>
+</tr>
+<tr>
+<td>Notifications</td>
+<td>Workout reminders, active workout indicator</td>
+</tr>
+<tr>
+<td>Exact Alarms</td>
+<td>Timely workout reminders at your chosen time</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>5. Data deletion</h2>
+<p>Since all personal data is stored locally on your device, you can delete it at any time by:</p>
+<ul>
+<li>Uninstalling the app, or</li>
+<li>Clearing app data via Android Settings → Apps → Fitness Tracker → Clear Data.</li>
+</ul>
+<h2>6. Children</h2>
+<p>The app is not directed at children under 13 and does not knowingly collect data from children in this age group.</p>
+<h2>7. Changes to this policy</h2>
+<p>We may update this privacy policy from time to time. The last updated date is always shown at the top of this document.</p>
+<h2>8. Contact</h2>
+<p>For questions about this policy: <strong><a href="mailto:foxiho.dev@gmail.com">foxiho.dev@gmail.com</a></strong></p>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>&copy; 2026 Fitness Tracker. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const contentUk = document.getElementById('contentUk');
+    const contentEn = document.getElementById('contentEn');
+    const policyBadge = document.getElementById('policyBadge');
+    const backBtnText = document.getElementById('backBtnText');
+    const langBtns = document.querySelectorAll('.lang-btn');
+
+    function setLanguage(lang) {
+      if (lang === 'en') {
+        document.documentElement.lang = 'en';
+        document.title = 'Privacy Policy — Fitness Tracker';
+        contentUk.style.display = 'none';
+        contentEn.style.display = 'block';
+        policyBadge.textContent = 'Privacy & Data Protection';
+        backBtnText.textContent = 'Back to Home';
+      } else {
+        document.documentElement.lang = 'uk';
+        document.title = 'Політика конфіденційності — Fitness Tracker';
+        contentUk.style.display = 'block';
+        contentEn.style.display = 'none';
+        policyBadge.textContent = 'Конфіденційність та Захист даних';
+        backBtnText.textContent = 'На головну';
+      }
+
+      langBtns.forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+      });
+
+      try {
+        localStorage.setItem('fitness_tracker_lang', lang);
+      } catch (e) {}
+    }
+
+    langBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        setLanguage(btn.getAttribute('data-lang'));
+      });
+    });
+
+    // Detect language
+    (function() {
+      let lang = 'uk';
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlLang = urlParams.get('lang');
+        const savedLang = localStorage.getItem('fitness_tracker_lang');
+        if (urlLang === 'en' || urlLang === 'uk') {
+          lang = urlLang;
+        } else if (savedLang === 'en' || savedLang === 'uk') {
+          lang = savedLang;
+        } else {
+          const browserLang = (navigator.language || '').toLowerCase();
+          if (browserLang.startsWith('en')) {
+            lang = 'en';
+          } else {
+            lang = 'uk';
+          }
+        }
+      } catch (e) {}
+      setLanguage(lang);
+    })();
+  </script>
+</body>
+</html>
