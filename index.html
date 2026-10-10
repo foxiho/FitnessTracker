@@ -317,7 +317,7 @@
 
     /* Mobile Nav Drawer */
     .mobile-nav {
-      display: none;
+      display: flex;
       position: fixed;
       top: 72px;
       left: 0;
@@ -330,16 +330,23 @@
       flex-direction: column;
       gap: 16px;
       z-index: 99;
-      transform: translateY(-10px);
+      transform: translateY(-16px);
       opacity: 0;
       pointer-events: none;
-      transition: var(--transition-smooth);
+      visibility: hidden;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s ease;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
     }
     .mobile-nav.open {
       transform: translateY(0);
       opacity: 1;
       pointer-events: auto;
+      visibility: visible;
+    }
+    @media (min-width: 641px) {
+      .mobile-nav {
+        display: none !important;
+      }
     }
     .mobile-nav a {
       color: var(--text);
@@ -3060,14 +3067,52 @@
     // Mobile Navigation Toggle
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mobileNav = document.getElementById('mobileNav');
-    mobileMenuBtn.addEventListener('click', () => {
-      mobileNav.classList.toggle('open');
+
+    function setMobileMenu(isOpen) {
+      if (isOpen) {
+        mobileNav.classList.add('open');
+        mobileMenuBtn.setAttribute('aria-expanded', 'true');
+        mobileMenuBtn.innerHTML = `
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>`;
+      } else {
+        mobileNav.classList.remove('open');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenuBtn.innerHTML = `
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>`;
+      }
+    }
+
+    mobileMenuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = mobileNav.classList.contains('open');
+      setMobileMenu(!isOpen);
     });
 
     document.querySelectorAll('.mob-link').forEach(link => {
       link.addEventListener('click', () => {
-        mobileNav.classList.remove('open');
+        setMobileMenu(false);
       });
+    });
+
+    // Close when tapping outside
+    document.addEventListener('click', (e) => {
+      if (mobileNav.classList.contains('open') && !mobileNav.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        setMobileMenu(false);
+      }
+    });
+
+    // Close on Escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
+        setMobileMenu(false);
+      }
     });
 
     // Language Detection on Page Load
